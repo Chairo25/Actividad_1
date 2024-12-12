@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Aplicación Web</title>
+
+  <script src="components/header.js" defer></script>
+  <script src="components/footer.js" defer></script>
+  <script src="components/menu.js" defer></script>
+  <script src="components/main.js" defer></script>
+  <script src="components/socialProfile.js" defer></script>
+  <script src="components/customTable.js" defer></script>
+  <script src="components/gallery.js" defer></script>
+</head>
+<body>
+  <custom-header></custom-header>
+  <custom-menu></custom-menu>
+  
+  <custom-main>
+    <custom-social-profile id="profile"></custom-social-profile>
+    <custom-table id="table"></custom-table>
+    <custom-gallery id="gallery"></custom-gallery>
+  </custom-main>
+  
+  <custom-footer></custom-footer>
+
+  <script>
+    // Mostrar el perfil por defecto al cargar
+    document.querySelector('#profile').style.display = 'block'; // Mostrar el perfil por defecto
+    document.querySelector('#table').style.display = 'none'; // Asegurarse de que la tabla esté oculta
+    document.querySelector('#gallery').style.display = 'none'; // Asegurarse de que la galería esté oculta
+
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        
+        // Ocultar todas las secciones
+        document.querySelectorAll('custom-social-profile, custom-table, custom-gallery').forEach(page => {
+          page.style.display = 'none';
+        });
+
+        // Mostrar la sección correspondiente
+        const targetSection = document.querySelector(`#${event.target.getAttribute('href').slice(1)}`);
+        if (targetSection) {
+          targetSection.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
